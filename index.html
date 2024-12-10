@@ -379,6 +379,16 @@
                         <label for="planes-1" class="required">Plan de acción 1:</label>
                         <textarea id="planes-1" name="planes[]" rows="4" maxlength="2000" required></textarea>
                         
+                        <label for="tiempo-1" class="required">Tiempo estimado:</label>
+                        <select id="tiempo-1" name="tiempo[]" required>
+                            <option value="" disabled selected>Seleccione un tiempo</option>
+                            <option value="1 semana">1 semana</option>
+                            <option value="1 mes">1 mes</option>
+                            <option value="3 meses">3 meses</option>
+                            <option value="6 meses">6 meses</option>
+                            <option value="1 año">1 año</option>
+                        </select>
+                        
                         <div class="removeFieldButtonContainer">
                             <button type="button" class="removeFieldButton" onclick="eliminarCampoPlan(this)">X</button>
                         </div>
@@ -490,12 +500,18 @@
             campos.forEach(function(campo, index) {
                 var etiquetaPlan = campo.querySelector('label[for^="planes-"]');
                 var plan = campo.querySelector('textarea[id^="planes-"]');
+                var etiquetaTiempo = campo.querySelector('label[for^="tiempo-"]');
+                var tiempo = campo.querySelector('select[id^="tiempo-"]');
 
                 var nuevoId = index + 1;
                 etiquetaPlan.setAttribute('for', `planes-${nuevoId}`);
                 etiquetaPlan.innerText = `Plan de acción ${nuevoId}:`;
                 plan.id = `planes-${nuevoId}`;
                 plan.name = 'planes[]';
+
+                etiquetaTiempo.setAttribute('for', `tiempo-${nuevoId}`);
+                tiempo.id = `tiempo-${nuevoId}`;
+                tiempo.name = 'tiempo[]';
             });
         }
 
@@ -626,6 +642,24 @@
             plan.maxLength = 2000;
             plan.required = true;
 
+            var etiquetaTiempo = document.createElement('label');
+            etiquetaTiempo.setAttribute('for', `tiempo-${nuevoId}`);
+            etiquetaTiempo.innerText = 'Tiempo estimado:';
+            etiquetaTiempo.className = 'required';
+
+            var tiempo = document.createElement('select');
+            tiempo.id = `tiempo-${nuevoId}`;
+            tiempo.name = 'tiempo[]';
+            tiempo.required = true;
+            tiempo.innerHTML = `
+                <option value="" disabled selected>Seleccione un tiempo</option>
+                <option value="1 semana">1 semana</option>
+                <option value="1 mes">1 mes</option>
+                <option value="3 meses">3 meses</option>
+                <option value="6 meses">6 meses</option>
+                <option value="1 año">1 año</option>
+            `;
+
             var removeButtonContainer = document.createElement('div');
             removeButtonContainer.className = 'removeFieldButtonContainer';
             var removeButton = document.createElement('button');
@@ -639,6 +673,8 @@
 
             nuevoCampo.appendChild(etiquetaPlan);
             nuevoCampo.appendChild(plan);
+            nuevoCampo.appendChild(etiquetaTiempo);
+            nuevoCampo.appendChild(tiempo);
             nuevoCampo.appendChild(removeButtonContainer);
 
             // Insertar el nuevo campo antes del botón de duplicar
