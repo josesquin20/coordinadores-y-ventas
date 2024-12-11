@@ -70,6 +70,9 @@
             right: -20px;
             transform: translateY(-50%);
         }
+        .removeFieldButtonContainer.planes {
+            top: 30%; /* Ajusta la posición del botón en los planes */
+        }
         .removeFieldButton {
             background-color: #ff3b30;
             color: white;
@@ -381,7 +384,7 @@
                     <div class="form-field" id="plan-1">
                         <label for="planes-1" class="required">Plan de acción 1:</label>
                         <textarea id="planes-1" name="planes[]" rows="4" maxlength="2000" required></textarea>
-                        <div class="removeFieldButtonContainer" style="display: none;">
+                        <div class="removeFieldButtonContainer planes" style="display: none;">
                             <button type="button" class="removeFieldButton" onclick="eliminarCampoPlan(this)">X</button>
                         </div>
                         <label for="tiempo-1" class="required">Tiempo estimado:</label>
@@ -680,7 +683,7 @@
             `;
 
             var removeButtonContainer = document.createElement('div');
-            removeButtonContainer.className = 'removeFieldButtonContainer';
+            removeButtonContainer.className = 'removeFieldButtonContainer planes';
             var removeButton = document.createElement('button');
             removeButton.type = 'button';
             removeButton.className = 'removeFieldButton';
@@ -840,4 +843,4 @@
         }
     </script>
 </body>
-</html>
+</html> 
