@@ -379,6 +379,10 @@
                         <label for="planes-1" class="required">Plan de acción 1:</label>
                         <textarea id="planes-1" name="planes[]" rows="4" maxlength="2000" required></textarea>
                         
+                        <div class="removeFieldButtonContainer">
+                            <button type="button" class="removeFieldButton" onclick="eliminarCampoPlan(this)">X</button>
+                        </div>
+                        
                         <label for="tiempo-1" class="required">Tiempo estimado:</label>
                         <select id="tiempo-1" name="tiempo[]" required>
                             <option value="" disabled selected>Seleccione un tiempo</option>
@@ -388,10 +392,6 @@
                             <option value="6 meses">6 meses</option>
                             <option value="1 año">1 año</option>
                         </select>
-                        
-                        <div class="removeFieldButtonContainer">
-                            <button type="button" class="removeFieldButton" onclick="eliminarCampoPlan(this)">X</button>
-                        </div>
                     </div>
                     <button id="addPlanButton" type="button" onclick="duplicarCamposPlanes()">+</button>
                 </div>
@@ -517,7 +517,7 @@
 
         function duplicarCampos() {
             var camposContainer = document.getElementById('campos');
-            if (camposContainer.querySelectorAll('.form-field').length >= 10) {
+            if (camposContainer.querySelectorAll('.form-field').length >= 12) {
                 mostrarModalAlertMax();
                 return;
             }
@@ -661,6 +661,24 @@
             `;
 
             var removeButtonContainer = document.createElement('div');
+            etiquetaTiempo.setAttribute('for', `tiempo-${nuevoId}`);
+            etiquetaTiempo.innerText = 'Tiempo estimado:';
+            etiquetaTiempo.className = 'required';
+
+            var tiempo = document.createElement('select');
+            tiempo.id = `tiempo-${nuevoId}`;
+            tiempo.name = 'tiempo[]';
+            tiempo.required = true;
+            tiempo.innerHTML = `
+                <option value="" disabled selected>Seleccione un tiempo</option>
+                <option value="1 semana">1 semana</option>
+                <option value="1 mes">1 mes</option>
+                <option value="3 meses">3 meses</option>
+                <option value="6 meses">6 meses</option>
+                <option value="1 año">1 año</option>
+            `;
+
+            var removeButtonContainer = document.createElement('div');
             removeButtonContainer.className = 'removeFieldButtonContainer';
             var removeButton = document.createElement('button');
             removeButton.type = 'button';
@@ -673,9 +691,9 @@
 
             nuevoCampo.appendChild(etiquetaPlan);
             nuevoCampo.appendChild(plan);
+            nuevoCampo.appendChild(removeButtonContainer); // Mover el botón aquí
             nuevoCampo.appendChild(etiquetaTiempo);
             nuevoCampo.appendChild(tiempo);
-            nuevoCampo.appendChild(removeButtonContainer);
 
             // Insertar el nuevo campo antes del botón de duplicar
             var addPlanButton = document.getElementById('addPlanButton');
