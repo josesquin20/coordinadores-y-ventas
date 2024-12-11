@@ -66,7 +66,7 @@
         }
         .removeFieldButtonContainer {
             position: absolute;
-            top: 50%;
+            top: 50%; /* Posición del botón */
             right: -20px;
             transform: translateY(-50%);
         }
@@ -357,6 +357,9 @@
                 <div class="form-field" id="campo-1">
                     <label for="comentarios-1" class="required">Deseo 1:</label>
                     <textarea id="comentarios-1" name="comentarios[]" rows="4" maxlength="2000" required></textarea>
+                    <div class="removeFieldButtonContainer" style="display: none;">
+                        <button type="button" class="removeFieldButton" onclick="eliminarCampo(this)">X</button>
+                    </div>
                 </div>
                 <button id="addFieldButton" type="button" onclick="duplicarCampos()">+</button>
                 <!-- Título estático para los problemas -->
@@ -365,8 +368,8 @@
                     <div class="form-field" id="problema-1">
                         <label for="problemas-1" class="required">Problema 1:</label>
                         <textarea id="problemas-1" name="problemas[]" rows="4" maxlength="2000" required></textarea>
-                        
-                        <div class="removeFieldButtonContainer">
+                        <!-- Botón de eliminar campos en los problemas -->
+                        <div class="removeFieldButtonContainer" style="display: none;">
                             <button type="button" class="removeFieldButton" onclick="eliminarCampoProblema(this)">X</button>
                         </div>
                     </div>
@@ -378,11 +381,9 @@
                     <div class="form-field" id="plan-1">
                         <label for="planes-1" class="required">Plan de acción 1:</label>
                         <textarea id="planes-1" name="planes[]" rows="4" maxlength="2000" required></textarea>
-                        
-                        <div class="removeFieldButtonContainer">
+                        <div class="removeFieldButtonContainer" style="display: none;">
                             <button type="button" class="removeFieldButton" onclick="eliminarCampoPlan(this)">X</button>
                         </div>
-                        
                         <label for="tiempo-1" class="required">Tiempo estimado:</label>
                         <select id="tiempo-1" name="tiempo[]" required>
                             <option value="" disabled selected>Seleccione un tiempo</option>
